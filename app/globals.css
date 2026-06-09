@@ -1,26 +1,344 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ══════════════════════════════════════════════════════════
+     Velour — the single source of truth.
+     Deep wine surface + molten gold primary. Dark by default.
+     Everything below maps shadcn / app tokens onto Velour.
+     ══════════════════════════════════════════════════════════ */
+
+  /* Raw Velour palette */
+  --v-bg-top:        #1B0F1A;
+  --v-bg-bot:        #1F1510;
+  --v-bg:            linear-gradient(180deg, #1B0F1A 0%, #1F1510 100%);
+  --v-card:          #25161F;
+  --v-card-2:        #2C1A24;
+  --v-row:           rgba(232,177,92,.03);
+  --v-row-border:    rgba(232,177,92,.08);
+  --v-border:        rgba(232,177,92,.15);
+  --v-border-strong: rgba(232,177,92,.25);
+  --v-divider:       rgba(232,177,92,.10);
+
+  --v-fg:            #F2E8DC;
+  --v-fg-muted:      #B0A090;
+  --v-fg-faint:      #6E6055;
+
+  --v-gold:          #E8B15C;
+  --v-gold-light:    #F5D79A;
+  --v-gold-deep:     #C87533;
+  --v-gold-grad:     linear-gradient(180deg, #E8B15C 0%, #C87533 100%);
+  --v-gold-grad-135: linear-gradient(135deg, #F5D79A, #E8B15C);
+  --v-ink:           #1B0F1A;
+
+  --v-rose:          #F5A8B8;
+  --v-red:           #D48680;
+  --v-green:         #A7D39B;
+  --v-spotify:       #1DB954;
+
+  --v-pill:          9999px;
+
+  --v-shadow-card:      0 30px 60px -20px rgba(0,0,0,.8), inset 0 0 0 1px rgba(232,177,92,.08);
+  --v-shadow-cta:       0 8px 20px -6px rgba(200,117,51,.55), inset 0 0 0 1px rgba(245,215,154,.4);
+  --v-shadow-lift:      0 20px 50px -16px rgba(0,0,0,.75);
+  --v-shadow-gold-glow: 0 0 0 1px rgba(232,177,92,.3), 0 8px 24px -6px rgba(200,117,51,.5);
+
+  /* ── Nav / Chrome — Velour wine ── */
+  --nav-bg:              #1B0F1A;
+  --nav-bg-hover:        #2C1A24;
+  --nav-border:          rgba(232,177,92,.15);
+  --nav-text:            #F2E8DC;
+  --nav-text-muted:      #B0A090;
+  --nav-active:          #E8B15C;
+
+  /* ── Page surfaces ── */
+  --background:          #1B0F1A;
+  --foreground:          #F2E8DC;
+  --card:                #25161F;
+  --card-foreground:     #F2E8DC;
+  --surface-alt:         #2C1A24;
+  --popover:             #25161F;
+  --popover-foreground:  #F2E8DC;
+
+  /* ── Primary — molten gold ── */
+  --primary:             #E8B15C;
+  --primary-hover:       #C87533;
+  --primary-foreground:  #1B0F1A;
+  --primary-light:       rgba(232,177,92,.12);
+
+  /* ── Secondary ── */
+  --secondary:           #2C1A24;
+  --secondary-foreground: #F5D79A;
+
+  /* ── Accent — warm gold-light ── */
+  --accent:              #F5D79A;
+  --accent-foreground:   #1B0F1A;
+  --accent-light:        rgba(245,215,154,.14);
+
+  /* ── Muted ── */
+  --muted:               #2C1A24;
+  --muted-foreground:    #B0A090;
+
+  /* ── Borders / Inputs ── */
+  --border:              rgba(232,177,92,.15);
+  --input:               rgba(232,177,92,.18);
+  --ring:                #E8B15C;
+
+  /* ── Destructive — warm rose ── */
+  --destructive:         #D48680;
+  --destructive-foreground: #1B0F1A;
+
+  /* ── Gradient — gold lockup ── */
+  --gradient:            linear-gradient(135deg, #F5D79A, #E8B15C);
+
+  /* ── Chart — editorial warm ── */
+  --chart-1:             #E8B15C;
+  --chart-2:             #D48680;
+  --chart-3:             #A7D39B;
+  --chart-4:             #F5A8B8;
+  --chart-5:             #C87533;
+
+  /* ── Radius ── */
+  --radius: 0.625rem;
+
+  /* ── Sidebar — matches nav ── */
+  --sidebar:                     #1B0F1A;
+  --sidebar-foreground:          #F2E8DC;
+  --sidebar-primary:             #E8B15C;
+  --sidebar-primary-foreground:  #1B0F1A;
+  --sidebar-accent:              #2C1A24;
+  --sidebar-accent-foreground:   #F5D79A;
+  --sidebar-border:              rgba(232,177,92,.15);
+  --sidebar-ring:                #E8B15C;
+}
+
+/* `.dark` kept identical to :root so any explicit opt-in stays on-brand */
+.dark {
+  --background:          #1B0F1A;
+  --foreground:          #F2E8DC;
+  --card:                #25161F;
+  --card-foreground:     #F2E8DC;
+  --popover:             #25161F;
+  --popover-foreground:  #F2E8DC;
+  --primary:             #E8B15C;
+  --primary-foreground:  #1B0F1A;
+  --secondary:           #2C1A24;
+  --secondary-foreground: #F5D79A;
+  --muted:               #2C1A24;
+  --muted-foreground:    #B0A090;
+  --accent:              #F5D79A;
+  --accent-foreground:   #1B0F1A;
+  --border:              rgba(232,177,92,.15);
+  --input:               rgba(232,177,92,.18);
+  --ring:                #E8B15C;
+  --destructive:         #D48680;
+  --destructive-foreground: #1B0F1A;
+  --chart-1:             #E8B15C;
+  --chart-2:             #D48680;
+  --chart-3:             #A7D39B;
+  --chart-4:             #F5A8B8;
+  --chart-5:             #C87533;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: 'Geist', 'Geist Fallback';
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-background:              var(--background);
+  --color-foreground:              var(--foreground);
+  --color-card:                    var(--card);
+  --color-card-foreground:         var(--card-foreground);
+  --color-popover:                 var(--popover);
+  --color-popover-foreground:      var(--popover-foreground);
+  --color-primary:                 var(--primary);
+  --color-primary-foreground:      var(--primary-foreground);
+  --color-secondary:               var(--secondary);
+  --color-secondary-foreground:    var(--secondary-foreground);
+  --color-muted:                   var(--muted);
+  --color-muted-foreground:        var(--muted-foreground);
+  --color-accent:                  var(--accent);
+  --color-accent-foreground:       var(--accent-foreground);
+  --color-destructive:             var(--destructive);
+  --color-destructive-foreground:  var(--destructive-foreground);
+  --color-border:                  var(--border);
+  --color-input:                   var(--input);
+  --color-ring:                    var(--ring);
+  --color-chart-1:                 var(--chart-1);
+  --color-chart-2:                 var(--chart-2);
+  --color-chart-3:                 var(--chart-3);
+  --color-chart-4:                 var(--chart-4);
+  --color-chart-5:                 var(--chart-5);
+  --radius-sm:  calc(var(--radius) - 4px);
+  --radius-md:  calc(var(--radius) - 2px);
+  --radius-lg:  var(--radius);
+  --radius-xl:  calc(var(--radius) + 4px);
+  --color-sidebar:                        var(--sidebar);
+  --color-sidebar-foreground:             var(--sidebar-foreground);
+  --color-sidebar-primary:                var(--sidebar-primary);
+  --color-sidebar-primary-foreground:     var(--sidebar-primary-foreground);
+  --color-sidebar-accent:                 var(--sidebar-accent);
+  --color-sidebar-accent-foreground:      var(--sidebar-accent-foreground);
+  --color-sidebar-border:                 var(--sidebar-border);
+  --color-sidebar-ring:                   var(--sidebar-ring);
 }
 
-@media (prefers-color-scheme: dark) {
+@layer base {
+  /* Score / compatibility — muted editorial scale (sage · gold · rose) */
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --compat-high:   #A7D39B;
+    --compat-medium: #E8B15C;
+    --compat-low:    #F5A8B8;
+    --compat-poor:   #D48680;
   }
-}
+  .dark {
+    --compat-high:   #A7D39B;
+    --compat-medium: #E8B15C;
+    --compat-low:    #F5A8B8;
+    --compat-poor:   #D48680;
+  }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  @keyframes gradient-pulse {
+    0%, 100% { opacity: 0.8; }
+    50%       { opacity: 1; }
+  }
+
+  @keyframes slide-in-right {
+    0%   { opacity: 0; transform: translateX(30px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes slide-in-left {
+    0%   { opacity: 0; transform: translateX(-30px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes fade-in-up {
+    0%   { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes shimmer {
+    0%   { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+  }
+
+  @keyframes scale-in {
+    0%   { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes v-fade-up {
+    0%   { opacity: 0; transform: translateY(14px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  .gradient-pulse {
+    animation: gradient-pulse 2s ease-in-out infinite;
+    background: var(--gradient);
+  }
+
+  .slide-in-right { animation: slide-in-right 0.4s ease-out; }
+  .slide-in-left  { animation: slide-in-left 0.4s ease-out; }
+  .fade-in-up     { animation: fade-in-up 0.5s ease-out; }
+  .scale-in       { animation: scale-in 0.3s ease-out; }
+  .v-enter        { animation: v-fade-up .45s ease-out both; }
+
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(232,177,92,0) 0%,
+      rgba(232,177,92,0.25) 50%,
+      rgba(232,177,92,0) 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  .hover-lift {
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  }
+  .hover-lift:hover {
+    transform: translateY(-2px);
+  }
+
+  .page-enter {
+    animation: fade-in-up 0.3s ease-out;
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     Velour editorial helpers — now global.
+     ══════════════════════════════════════════════════════════ */
+  .v-display {
+    font-family: var(--font-fraunces), 'Playfair Display', Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+  }
+  .v-italic { font-style: italic; }
+  .v-gold   { color: var(--v-gold); }
+  .v-mono {
+    font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .v-wordmark {
+    font-family: var(--font-fraunces), 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    background: var(--v-gold-grad-135);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.01em;
+  }
+  .v-page-texture {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 90% 50% at 50% 0%, rgba(232,177,92,.07), transparent 55%),
+      radial-gradient(ellipse 60% 40% at 10% 100%, rgba(200,117,51,.05), transparent 55%);
+  }
+  .v-grain {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: .035;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  /* Gold-gradient CTA surface (drop-in for primary buttons/links) */
+  .v-cta-gold {
+    background: var(--v-gold-grad) !important;
+    color: var(--v-ink) !important;
+    border: none !important;
+    box-shadow: var(--v-shadow-cta) !important;
+    letter-spacing: .01em;
+  }
+
+  /* Focus ring — gold halo */
+  :focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(232,177,92,.35);
+  }
+
+  /* ── Semantic Typography Scale ── */
+  .text-display  { @apply text-4xl font-bold leading-tight; }
+  .text-title    { @apply text-2xl font-semibold leading-snug; }
+  .text-body     { @apply text-base leading-relaxed; }
+  .text-label    { @apply text-sm font-medium; }
+  .text-caption  { @apply text-xs text-muted-foreground; }
 }
