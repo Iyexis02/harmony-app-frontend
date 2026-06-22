@@ -1,6 +1,7 @@
 import type { ArtistSearchResult, TrackSearchResult, GenreSeedsResponse, SpotifyArtist } from '@/types/spotify-public';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api/v1';
+// Bare backend origin (no `/api/v1`), matching BACKEND_API_URL / lib/api.ts. Paths below add `/api/v1`.
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
 
 /**
  * Search for artists by name/keyword (PUBLIC endpoint - no auth required)
@@ -14,7 +15,7 @@ export async function searchArtists(
     return { items: [], limit, offset, total: 0, next: null, previous: null };
   }
 
-  const url = `${API_BASE_URL}/spotify/search/artists?query=${encodeURIComponent(query)}&limit=${limit}&offset=${offset}`;
+  const url = `${API_BASE_URL}/api/v1/spotify/search/artists?query=${encodeURIComponent(query)}&limit=${limit}&offset=${offset}`;
 
   const response = await fetch(url, {
     method: 'GET',
@@ -42,7 +43,7 @@ export async function searchTracks(
     return { items: [], limit, offset, total: 0, next: null, previous: null };
   }
 
-  const url = `${API_BASE_URL}/spotify/search/tracks?query=${encodeURIComponent(query)}&limit=${limit}&offset=${offset}`;
+  const url = `${API_BASE_URL}/api/v1/spotify/search/tracks?query=${encodeURIComponent(query)}&limit=${limit}&offset=${offset}`;
 
   const response = await fetch(url, {
     method: 'GET',
@@ -63,7 +64,7 @@ export async function searchTracks(
  * This list rarely changes, so consider caching the result
  */
 export async function getGenres(): Promise<GenreSeedsResponse> {
-  const url = `${API_BASE_URL}/spotify/genres`;
+  const url = `${API_BASE_URL}/api/v1/spotify/genres`;
 
   const response = await fetch(url, {
     method: 'GET',
@@ -83,7 +84,7 @@ export async function getGenres(): Promise<GenreSeedsResponse> {
  * Get detailed artist information by Spotify ID (PUBLIC endpoint - no auth required)
  */
 export async function getArtistById(artistId: string): Promise<SpotifyArtist> {
-  const url = `${API_BASE_URL}/spotify/artists/${artistId}`;
+  const url = `${API_BASE_URL}/api/v1/spotify/artists/${artistId}`;
 
   const response = await fetch(url, {
     method: 'GET',
